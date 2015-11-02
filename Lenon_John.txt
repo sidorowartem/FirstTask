@@ -1,0 +1,9 @@
+Lenon;John;+380112223344s;London,UK
+Stark;Tony;+160223334411;USA
+Hogan;Terry'Hulk';n/a;USA,NYC
+Hogan;Bill;+521112223344;Scotland,Edinburgh
+Pupkin;George;+170509996688;Russia,Moscow
+Eltsyn;Boris;+174547772365;Russia,Moscow
+Kuchma;Leonid;+380440008778;Ukraine,Kiev
+Bush;George;n/a;n/a
+Pupkin;Vasiliy;+380112223344;Ukraine,Kiev
