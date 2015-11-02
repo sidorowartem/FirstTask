@@ -1,0 +1,10 @@
+-classpath 'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\build\\classes\\main;C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\build\\resources\\main;C:\\Users\\taras\\.gradle\\caches\\modules-2\\files-2.1\\org.apache.logging.log4j\\log4j-api\\2.4.1\\594e5643c9267ac1e91960a6b7315cf368c9ea02\\log4j-api-2.4.1.jar;C:\\Users\\taras\\.gradle\\caches\\modules-2\\files-2.1\\org.apache.logging.log4j\\log4j-core\\2.4.1\\a5334910f90944575147fd1c1aef9f407c24db99\\log4j-core-2.4.1.jar'
+-d 'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\build\\docs\\javadoc'
+-doctitle 'firstTask 1.0-SNAPSHOT API'
+-quiet 
+-windowtitle 'firstTask 1.0-SNAPSHOT API'
+'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\src\\main\\java\\com\\taras\\Extracter.java'
+'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\src\\main\\java\\com\\taras\\FirstTask.java'
+'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\src\\main\\java\\com\\taras\\Person.java'
+'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\src\\main\\java\\com\\taras\\RandArray.java'
+'C:\\Users\\taras\\Documents\\IdeaProjects\\firstTask\\src\\main\\java\\com\\taras\\SecondTask.java'
