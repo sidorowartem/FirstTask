@@ -108,14 +108,12 @@ public class Extracter {
         String name = Person.getOftenName();
         File file = new File(name + ".txt");
         try {
-            //проверяем, что если файл не существует то создаем его
             if(!file.exists()){
                 file.createNewFile();
                 log.debug("File " + file.getCanonicalPath() + " has been created.");
             } else {
                 log.debug("File " + file.getCanonicalPath() + " has been opened.");
             }
-            //Возможность записи в файл
             PrintWriter out = new PrintWriter(file.getAbsoluteFile());
             try {
                 //Запись
@@ -124,11 +122,11 @@ public class Extracter {
                     out.println(str);
                 }
 
-            } finally {
+            }finally {
                 out.close();
                 log.debug("File " + file.getCanonicalPath() + " has been closed.");
             }
-        } catch(IOException e) {
+        }catch(IOException e) {
             throw new RuntimeException(e);
         }
     }

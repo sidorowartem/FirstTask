@@ -27,7 +27,7 @@ public class RandArray {
 
     RandArray() {
 
-        array = new int[100];
+        array = new int[rand.nextInt()];
         init();
     }
     RandArray(int size) {
@@ -35,12 +35,13 @@ public class RandArray {
         init();
     }
 
-    public String showResultsToLog() {
-        String res = "\n";
+    public String getResults() {
+        String separator = System.getProperty("line.separator");
+        StringBuilder res = new StringBuilder("Final result:" + separator);
         for (int i = 0; i < numbs.length; i++) {
-            res +=("Number \"" + numbs[i] + "\" has been written "
-            + counter[i] + " times.\n");
+            res.append("Number \"" + numbs[i] + "\" has been written "
+            + counter[i] + " times." + separator);
         }
-        return res;
+        return res.toString();
     }
 }

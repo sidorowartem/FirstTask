@@ -11,6 +11,6 @@ public class FirstTask {
 
     public static void main(String[] args) {
         RandArray ra = new RandArray(100);
-        log.trace(ra.showResultsToLog());
+        log.trace(ra.getResults());
     }
 }
