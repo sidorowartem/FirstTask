@@ -42,7 +42,7 @@ public class Extracter {
         zip.close();
     }
 
-    private String changeSlashes(String end){
+    private String changeSlashes(String end) {
         int index = end.lastIndexOf('/');
         if (index == -1)
             return end;
@@ -52,17 +52,15 @@ public class Extracter {
         }
     }
 
-    public void enterZipAndRead(String path) throws IOException{
+    public void enterZipAndRead(String path) throws IOException {
         unpack(path);
         ZipInputStream zin = null;
-        try
-        {
+        try {
             log.debug("Zip file " + path + " has been opened.");
             zin = new ZipInputStream(new FileInputStream(path));
             ZipEntry entry;
             String name;
-            while ( (entry = zin.getNextEntry() ) != null)
-            {
+            while ( (entry = zin.getNextEntry() ) != null) {
                 String end = changeSlashes(entry.getName());
                 name = path.substring(0,path.lastIndexOf('\\')) + "\\" + end;
                 String format = getFileExtention(name);
