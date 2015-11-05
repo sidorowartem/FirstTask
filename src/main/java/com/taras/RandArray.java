@@ -15,7 +15,7 @@ public class RandArray {
 
     private int[] randomArray;
     private Random rand = new Random();
-    private Map<Integer, Integer> numbsWithCounters = new HashMap<>();
+    private Map<Integer, Integer> numbsWithCounters = new HashMap<Integer, Integer>();
     private int[] numbs = {1, 3, 5, 7, 9};
 
     private void init() {
