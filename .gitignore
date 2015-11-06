@@ -1,5 +1,8 @@
-/.idea
-/build
+.idea
+build
+.gradle
+Lenon_John.txt
+/src/main/resources/root_folder
 # комментарий Ч эта строка игнорируетс€
 # не обрабатывать файлы, им€ которых заканчиваетс€ на .a
 #*.a
