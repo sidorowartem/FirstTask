@@ -28,20 +28,20 @@ public class RandArray {
             randomArray[i] = value;
             numbsWithCounters.put(value, numbsWithCounters.get(value) + 1);
             //small hint - logger CAN use pattern :-)
-            log.trace("Number \"{}\" was added {} times.", value, numbsWithCounters.get(value));
+            log.trace(value);
         }
     }
 
     RandArray() {
         randomArray = new int[rand.nextInt()];
-        init();
     }
+
     RandArray(int size) {
         randomArray = new int[size];
-        init();
     }
 
     public String getResults() {
+        init();
         StringBuilder res = new StringBuilder("Final result:" + LINE_SEPARATOR);
         /*
         for (int i = 0; i < numbs.length; i++) {

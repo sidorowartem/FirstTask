@@ -2,10 +2,10 @@
 <configuration monitorInterval="3">
     <appenders>
         <File name="FILE_INFO" fileName="logs/FirstTask/info.log">
-            <PatternLayout pattern="%d{ISO8601} [%-5p] (%F:%L) - %m%n"/>
+            <PatternLayout pattern="%d{ISO8601} [%-5p] (%F:%L) - Number %m was added.%n" />
         </File>
-        <File name="FILE_INFO" fileName="logs/FirstTask/info.log">
-            <PatternLayout pattern="%d{ISO8601} [%-5p] (%F:%L) - %m%n"/>
+        <File name="FILE_ERROR" fileName="logs/SecondTask/info.log">
+            <PatternLayout pattern="%d{ISO8601} [%-5p] (%F:%L) - %m%n" />
         </File>
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{ABSOLUTE} [%-5p] (%F:%L) - %m%n"/>
@@ -19,6 +19,9 @@
         </root>
         <logger name="com.taras.RandArray" level="ALL" additivity="false">
             <AppenderRef ref="FILE_INFO" level="ALL"/>
+        </logger>
+        <logger name="com.taras.SecondTask" level="WARN" additivity="false">
+            <AppenderRef ref="FILE_ERROR" level="WARN"/>
         </logger>
         <logger name="com.taras.FirstTask" level="ALL" additivity="false">
             <AppenderRef ref="STDOUT" level="ALL"/>
