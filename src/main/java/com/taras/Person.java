@@ -1,7 +1,6 @@
 package com.taras;
 
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by taras on 28.10.2015.
@@ -33,9 +32,16 @@ public class Person {
     }
     public static String[] getAllText() {
         String[] res = new String[persons.size()];
+        char semicolon =';';
         int i = 0;
         for (Person p : persons) {
-            res[i] =(p.name + ";" + p.sname + ";" + p.telehone + ";" + p.address);
+            res[i] = new StringBuilder(p.name)
+                    .append(semicolon)
+                    .append(p.sname)
+                    .append(semicolon)
+                    .append(p.telehone)
+                    .append(semicolon)
+                    .append(p.address).toString();
             i++;
         }
         return res;
