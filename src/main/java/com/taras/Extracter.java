@@ -7,30 +7,29 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.*;
 
-/**
- * Created by taras on 26.10.2015.
- */
+
 
 public class Extracter {
     public static final Logger log = LogManager.getLogger(Extracter.class);
+    public static final char  FILES_EPARATOR = System.getProperty("file.separator").toCharArray()[0];
 
     private void unpack(String path) throws IOException {
-        String dir_to = path.substring(0,path.lastIndexOf('\\'));
+        String dir_to = path.substring(0,path.lastIndexOf(FILES_EPARATOR));
         ZipFile zip = new ZipFile(path);
         Enumeration entries = zip.entries();
-        LinkedList<ZipEntry> zfiles = new LinkedList<ZipEntry>();
+        List<ZipEntry> zfiles = new LinkedList<ZipEntry>();
         log.debug("Zip file " + path + " has been opened.");
         while (entries.hasMoreElements()) {
             ZipEntry entry = (ZipEntry) entries.nextElement();
             if (entry.isDirectory()) {
-                new File(dir_to+"\\"+entry.getName()).mkdir();
+                new File(dir_to + FILES_EPARATOR + entry.getName()).mkdir();
             } else {
                 zfiles.add(entry);
             }
         }
         for (ZipEntry entry : zfiles) {
             InputStream in = zip.getInputStream(entry);
-            OutputStream out = new FileOutputStream(dir_to + "\\" + entry.getName());
+            OutputStream out = new FileOutputStream(dir_to + FILES_EPARATOR + entry.getName());
             byte[] buffer = new byte[1024];
             int len;
             while ((len = in.read(buffer)) >= 0)
@@ -42,15 +41,16 @@ public class Extracter {
         zip.close();
     }
 
-    private String changeSlashes(String end) {
-        int index = end.lastIndexOf('/');
-        if (index == -1)
-            return end;
-        else {
-            String result = end.substring(0, index) + "\\" + end.substring(index + 1);
-            return changeSlashes(result);
-        }
-    }
+//    private String changeSlashes(String end) {
+//        int index = end.lastIndexOf('/');
+//
+//        if (index == -1)
+//            return end;
+//        else {
+//            String result = end.substring(0, index) + "\\" + end.substring(index + 1);
+//            return changeSlashes(result);
+//        }
+//    }
 
     public void enterZipAndRead(String path) throws IOException {
         unpack(path);
@@ -61,8 +61,8 @@ public class Extracter {
             ZipEntry entry;
             String name;
             while ( (entry = zin.getNextEntry() ) != null) {
-                String end = changeSlashes(entry.getName());
-                name = path.substring(0,path.lastIndexOf('\\')) + "\\" + end;
+                String end = entry.getName().replace('/', FILES_EPARATOR);
+                name = path.substring(0,path.lastIndexOf(FILES_EPARATOR)) + FILES_EPARATOR + end;
                 String format = getFileExtention(name);
                 if (format.equals("txt")) {
                     readFromFile(name);
@@ -99,12 +99,12 @@ public class Extracter {
         }
     }
 
-    public static String getFileExtention(String filename){
+    public static String getFileExtention(String filename) {
         int dotPos = filename.lastIndexOf(".") + 1;
         return filename.substring(dotPos);
     }
 
-    public static void writeToFile(){
+    public void writeToFile() {
         String name = Person.getOftenName();
         File file = new File(name + ".txt");
         try {
@@ -116,7 +116,6 @@ public class Extracter {
             }
             PrintWriter out = new PrintWriter(file.getAbsoluteFile());
             try {
-                //Запись
                 String [] temp = Person.getAllText();
                 for (String str : temp) {
                     out.println(str);
