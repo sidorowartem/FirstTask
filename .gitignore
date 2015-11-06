@@ -1,6 +1,10 @@
 .idea
 build
 .gradle
+/.idea
+/build
+/.gradle
+
 Lenon_John.txt
 /src/main/resources/root_folder
 # комментарий Ч эта строка игнорируетс€
