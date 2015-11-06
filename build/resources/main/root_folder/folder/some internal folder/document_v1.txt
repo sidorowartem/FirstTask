@@ -1,3 +1,0 @@
-Hogan;Terry'Hulk';n/a;USA,NYC
-Hogan;Bill;+521112223344;Scotland,Edinburgh
-Pupkin;George;+170509996688;Russia,Moscow
