@@ -88,7 +88,7 @@ public class Extracter {
             while ((s = reader.readLine()) != null) {
                 if (s.length() !=0) {
                     String[] temp = s.split(";");
-                    Person.addPerson(temp[0], temp[1], temp[2], temp[3]);
+                    Person.createPerson(temp[0], temp[1], temp[2], temp[3]);
                 }
             }
             reader.close();
@@ -106,7 +106,7 @@ public class Extracter {
     }
 
     public void writeToFile() {
-        String name = Person.getOftenName();
+        String name = PersonManager.getOftenName();
 
         File file = new File(name + ".txt");
         try {
@@ -118,7 +118,7 @@ public class Extracter {
             }
             PrintWriter out = new PrintWriter(file.getAbsoluteFile());
             try {
-                String [] temp = Person.getAllText();
+                String [] temp = PersonManager.getAllText();
                 for (String str : temp) {
                     out.write(str + LINE_SEPARATOR);
                     log.debug(str);
