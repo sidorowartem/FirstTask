@@ -42,17 +42,6 @@ public class Extracter {
         zip.close();
     }
 
-//    private String changeSlashes(String end) {
-//        int index = end.lastIndexOf('/');
-//
-//        if (index == -1)
-//            return end;
-//        else {
-//            String result = end.substring(0, index) + "\\" + end.substring(index + 1);
-//            return changeSlashes(result);
-//        }
-//    }
-
     public void enterZipAndRead(String path) throws IOException {
         unpack(path);
         ZipInputStream zin = null;
@@ -110,7 +99,7 @@ public class Extracter {
 
         File file = new File(name + ".txt");
         try {
-            if(!file.exists()){
+            if(!file.exists()) {
                 file.createNewFile();
                 log.debug("File {} has been created.", file.getCanonicalPath());
             } else {
@@ -124,11 +113,11 @@ public class Extracter {
                     log.debug(str);
                 }
 
-            }finally {
+            } finally {
                 out.close();
                 log.debug("File {} has been closed.", file.getCanonicalPath());
             }
-        }catch(IOException e) {
+        } catch(IOException e) {
             throw new RuntimeException(e);
         }
     }

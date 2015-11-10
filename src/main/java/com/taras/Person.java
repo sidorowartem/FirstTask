@@ -1,8 +1,5 @@
 package com.taras;
 
-/**
- * Created by taras on 28.10.2015.
- */
 
 public class Person {
     String name;
@@ -27,18 +24,30 @@ public class Person {
 
     @Override
     public String toString() {
-        return name + "_" + sname;
+        char semicolon = ';';
+        String result = new StringBuilder(name)
+                .append(semicolon)
+                .append(sname)
+                .append(semicolon)
+                .append(telehone)
+                .append(semicolon)
+                .append(address).toString();
+        return result;
     }
 
-//    @Override
-//    public int hashCode() {
-//        return name.length();
-//    }
-//
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (obj.hashCode() == this.hashCode())
-//            return true;
-//        return false;
-//    }
+    @Override
+    public int hashCode() {
+        return name.length() + sname.length();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Person) {
+            Person temp = (Person)obj;
+            if ((this.name.equals(temp.name))
+                    && (this.sname.equals(temp.sname)))
+                return true;
+        }
+        return false;
+    }
 }

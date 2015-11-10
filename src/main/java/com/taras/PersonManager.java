@@ -1,13 +1,13 @@
 package com.taras;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PersonManager {
-    final static List<Person> persons = new LinkedList<Person>();
+    final static Set<Person> persons = new HashSet<Person>();
 
     public static String getOftenName() {
-        Person temp = persons.get(0);
+        Person temp = persons.iterator().next();
         for (Person p : persons) {
             if (p.counter > temp.counter)
                 temp = p;
@@ -17,32 +17,20 @@ public class PersonManager {
 
     public static String[] getAllText() {
         String[] res = new String[persons.size()];
-        char semicolon =';';
         int i = 0;
         for (Person p : persons) {
-            res[i] = new StringBuilder(p.name)
-                    .append(semicolon)
-                    .append(p.sname)
-                    .append(semicolon)
-                    .append(p.telehone)
-                    .append(semicolon)
-                    .append(p.address).toString();
+            res[i] = p.toString();
             i++;
         }
         return res;
     }
 
-
     static void addPerson(Person person) {
-        boolean exist = false;
-        for (Person p : persons) {
-            if (p.toString().equals(person.toString())) {
-                p.counter++;
-                exist = true;
-                break;
-            }
-        }
-        if (!exist) {
+        if (persons.contains(person)) {
+            persons.remove(person);
+            person.counter++;
+            persons.add(person);
+        } else {
             persons.add(person);
         }
     }
