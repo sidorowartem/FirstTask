@@ -8,7 +8,8 @@ public class FirstTask {
     public static final Logger log = LogManager.getLogger(FirstTask.class);
 
     public static void main(String[] args) {
-        RandArray ra = new RandArray(100);
-        log.trace(ra.getResults());
+        RandArray randArray = new RandArray(100);
+        randArray.process();
+        log.trace(randArray.getResults());
     }
 }

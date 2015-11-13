@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PersonManager {
-    final static Set<Person> persons = new HashSet<Person>();
+    final static Set<Person> persons = new HashSet<>();
 
     public static String getOftenName() {
         Person temp = persons.iterator().next();

@@ -11,7 +11,7 @@ public class RandArray {
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private int[] randomArray;
     private Random rand = new Random();
-    private Map<Integer, Integer> numbsWithCounters = new HashMap<Integer, Integer>();
+    private Map<Integer, Integer> numbsWithCounters = new HashMap<>();
     private int[] numbs = {1, 3, 5, 7, 9};
 
     private void resetCounters() {
@@ -19,7 +19,7 @@ public class RandArray {
             numbsWithCounters.put(number, 0);
         }
     }
-    private void init() {
+    public void process() {
         resetCounters();
         for (int i = 0; i < randomArray.length; i++) {
             int randomIndex = rand.nextInt(numbs.length);
@@ -30,16 +30,11 @@ public class RandArray {
         }
     }
 
-    RandArray() {
-        randomArray = new int[rand.nextInt()];
-    }
-
     RandArray(int size) {
         randomArray = new int[size];
     }
 
     public String getResults() {
-        init();
         StringBuilder res = new StringBuilder("Final result:" + LINE_SEPARATOR);
        for(Integer key: numbsWithCounters.keySet()) {
             res.append("Number \"")

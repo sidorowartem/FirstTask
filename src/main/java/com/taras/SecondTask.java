@@ -7,7 +7,7 @@ import java.io.IOException;
 
 
 public class SecondTask {
-    public static final Logger log = LogManager.getLogger(FirstTask.class);
+    public static final Logger log = LogManager.getLogger(SecondTask.class);
 
     public static void main(String[] args) {
         Extracter extracter = new Extracter();
