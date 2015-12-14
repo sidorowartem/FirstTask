@@ -15,53 +15,34 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 
-
 public class Extracter {
     public static final Logger log = LogManager.getLogger(Extracter.class);
     public static final char FILE_SEPARATOR = System.getProperty("file.separator").toCharArray()[0];
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     private void unpack(String path) {
-        String dir_to = path.substring(0,path.lastIndexOf(FILE_SEPARATOR));
-        ZipFile zip = null;
-        try {
-            zip = new ZipFile(path);
-            try {
-                Enumeration entries = zip.entries();
-                List<ZipEntry> zfiles = new LinkedList<>();
-                log.debug("Zip file {} has been opened.", path);
-                while (entries.hasMoreElements()) {
-                    ZipEntry entry = (ZipEntry) entries.nextElement();
-                    if (entry.isDirectory()) {
-                        new File(dir_to + FILE_SEPARATOR + entry.getName()).mkdir();
-                    } else {
-                        zfiles.add(entry);
-                    }
+        String dir_to = path.substring(0, path.lastIndexOf(FILE_SEPARATOR));
+        try (ZipFile zip = new ZipFile(path)) {
+            Enumeration entries = zip.entries();
+            List<ZipEntry> zfiles = new LinkedList<>();
+            log.debug("Zip file {} has been opened.", path);
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = (ZipEntry) entries.nextElement();
+                if (entry.isDirectory()) {
+                    new File(dir_to + FILE_SEPARATOR + entry.getName()).mkdir();
+                } else {
+                    zfiles.add(entry);
                 }
-                InputStream in;
-                OutputStream out;
-                for (ZipEntry entry : zfiles) {
-                    try {
-                        out = new FileOutputStream(dir_to + FILE_SEPARATOR + entry.getName());
-                        in = zip.getInputStream(entry);
-                        try {
-                            byte[] buffer = new byte[1024];
-                            int len;
-                            while ((len = in.read(buffer)) >= 0)
-                                out.write(buffer, 0, len);
-                        } catch (IOException ex) {
-                            out.close();
-                            in.close();
-                            log.error(ex.getMessage());
-                        }
-                    } catch (IOException ex) {
-                        log.error(ex.getMessage());
-                    }
+            }
+            for (ZipEntry entry : zfiles) {
+                try (InputStream in = zip.getInputStream(entry); OutputStream out = new FileOutputStream(dir_to + FILE_SEPARATOR + entry.getName())) {
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    while ((len = in.read(buffer)) >= 0)
+                        out.write(buffer, 0, len);
+                } catch (IOException ex) {
+                    log.error(ex.getMessage());
                 }
-            } finally {
-                log.debug("Zip file {} has been closed.", path);
-                if (zip != null)
-                    zip.close();
             }
         } catch (IOException ex) {
             log.error("Can not open zip file: " + ex.getMessage());
@@ -70,9 +51,7 @@ public class Extracter {
 
     public void enterZipAndRead(String path) throws IOException {
         unpack(path);
-        ZipInputStream zin = null;
-        try {
-            zin = new ZipInputStream(new FileInputStream(path));
+        try (ZipInputStream zin = new ZipInputStream(new FileInputStream(path))) {
             log.debug("Zip file {} has been opened.", path);
             try {
                 ZipEntry entry;
@@ -89,22 +68,19 @@ public class Extracter {
                 }
             } catch (IOException ex) {
                 log.error(ex.getMessage());
-            } finally {
-                if (zin != null)
-                    zin.close();
-                log.debug("Zip file {} has been closed.", path);
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             log.error("Can not find or open zip file: " + ex.getMessage());
         }
     }
 
-    private void createPersonFromString (String s) {
-        if (s.length() !=0) {
+    private void createPersonFromString(String s) {
+        if (s.length() != 0) {
             String[] temp = s.split(";");
             Person.createPerson(temp[0], temp[1], temp[2], temp[3]);
         }
     }
+
     private void readFromFile(String path) {
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
             log.debug("File {} has been opened.", path);
@@ -125,25 +101,26 @@ public class Extracter {
 
         File file = new File(name + ".txt");
         try {
-            if(!file.exists()) {
-                file.createNewFile();
-                log.debug("File {} has been created.", file.getCanonicalPath());
+            if (!file.exists()) {
+                if (file.createNewFile()) {
+                    log.debug("File {} has been created.", file.getCanonicalPath());
+                } else {
+                    log.debug("File {} was not created - already exists.", file.getCanonicalPath());
+                }
             } else {
                 log.debug("File {} has been opened.", file.getCanonicalPath());
             }
-            PrintWriter out = new PrintWriter(file.getAbsoluteFile());
-            try {
-                String [] temp = PersonManager.getAllText();
+            try (PrintWriter out = new PrintWriter(file.getAbsoluteFile())) {
+                String[] temp = PersonManager.getAllText();
                 for (String str : temp) {
                     out.write(str + LINE_SEPARATOR);
                     log.debug(str);
                 }
 
             } finally {
-                out.close();
                 log.debug("File {} has been closed.", file.getCanonicalPath());
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             log.error(e.getMessage());
         }
     }
