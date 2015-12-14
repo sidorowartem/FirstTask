@@ -2,13 +2,13 @@ package com.taras;
 
 
 public class Person {
-    String name;
-    String sname;
-    String telehone;
-    String address;
-    int counter;
+    private String name;
+    private String sname;
+    private String telehone;
+    private String address;
+    private int counter;
 
-     private Person(String name, String sname, String telephone, String address){
+    private Person(String name, String sname, String telephone, String address){
         this.name = name;
         this.sname = sname;
         this.telehone = telephone;
@@ -57,5 +57,13 @@ public class Person {
         result = 31 * result + (telehone != null ? telehone.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
